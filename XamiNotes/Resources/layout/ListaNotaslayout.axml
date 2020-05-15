@@ -1,0 +1,36 @@
+  
+<LinearLayout 
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+     <!--<include
+        android:id="@+id/toolbarImport"
+        layout="@layout/ToolbarNotaslayout"
+         />-->
+    
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+        android:orientation="vertical">
+        <Toolbar
+    
+    android:id="@+id/toolbarNotas"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/colorPrimary"
+    android:titleTextColor="#ffffff"
+    android:title="Mis notas"
+    />
+
+   
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listViewNotas"/>
+        </LinearLayout>
+
+</LinearLayout>
+  
+

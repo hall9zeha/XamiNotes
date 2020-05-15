@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--For all properties see: http://developer.android.com/guide/topics/resources/menu-resource.html-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  
+  <item android:id="@+id/saveUpdate"
+         android:showAsAction="ifRoom"
+       
+        android:title="Editar"
+        android:icon="@mipmap/ic_action_save_alt"
+        />
+  <item android:id="@+id/eliminarNota"
+        android:showAsAction="ifRoom"
+        
+        android:title="Eliminar"
+        android:icon="@mipmap/ic_action_delete"
+        />
+  <item android:id="@+id/colorDetalle"
+        android:showAsAction="ifRoom"
+        android:title="Color"
+        android:icon="@mipmap/ic_action_color_lens"
+        >
+    <menu>
+     <item 
+        android:id="@+id/submenuYellow"
+        android:title="Amarillo"
+        android:showAsAction="always"
+       android:icon="@mipmap/ic_action_save_alt"/>
+      <item
+      android:id="@+id/submenuGreen"
+      android:title="Verde"
+      android:showAsAction="always"/>
+      <item
+        android:id="@+id/submenuBlue"
+        android:title="Azul"
+        android:showAsAction="always"/>
+      <item
+        android:id="@+id/submenuOrange"
+        android:title="Naranja"
+        android:showAsAction="always"/>
+  </menu>
+    </item>
+  
+</menu>
+
+<!-- Code to implement into Activity:
+
+Android.Widget.SearchView searchView;
+public override bool OnCreateOptionsMenu(IMenu menu)
+{
+  this.MenuInflater.Inflate(Resource.Menu.DetalleNotaMenu, menu);
+
+  var searchItem = menu.FindItem(Resource.Id.action_search);
+
+  searchView = searchItem.ActionProvider.JavaCast<Android.Widget.SearchView>();
+
+  searchView.QueryTextSubmit += (sender, args) =>
+  {
+    Toast.MakeText(this, "You searched: " + args.Query, ToastLength.Short).Show();
+
+  };
+
+
+  return base.OnCreateOptionsMenu(menu);
+}
+
+-->

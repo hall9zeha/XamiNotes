@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">XamiNotes</string>
+  
+    <string name="action_settings">Settings</string>
+
+  <style name="AppTheme" parent="android:Theme.Material.Light">
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowActionBar">false</item>
+    <item name="android:colorPrimary">@color/colorPrimary</item>
+    <item name="android:colorAccent">@color/colorAccent</item>
+    <item name="android:statusBarColor">@color/colorPrimary</item>
+
+    <!--<item name="android:statusPrimaryDark">#C7A935</item>-->
+  </style>
+</resources>
