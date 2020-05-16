@@ -16,19 +16,29 @@
       <item 
         android:id="@+id/submenuYellow"
         android:title="Amarillo"
-        android:showAsAction="always"/>
+        android:showAsAction="always"
+        android:icon="@mipmap/ic_action_image_yellow"/>
       <item
       android:id="@+id/submenuGreen"
       android:title="Verde"
-      android:showAsAction="always"/>
+      android:showAsAction="always"
+      android:icon="@mipmap/ic_action_image_green"/>
       <item
         android:id="@+id/submenuBlue"
         android:title="Azul"
-        android:showAsAction="always"/>
+        android:showAsAction="always"
+        android:icon="@mipmap/ic_action_images"/>
       <item
         android:id="@+id/submenuOrange"
         android:title="Naranja"
-        android:showAsAction="always"/>
+        android:showAsAction="always"
+        android:icon="@mipmap/ic_action_image_orange"/>
+      <item
+        android:id="@+id/submenuViolet"
+        android:title="Violeta"
+        android:showAsAction="always"
+        android:icon="@mipmap/ic_action_image_violet"
+        />
       
       
     </menu>

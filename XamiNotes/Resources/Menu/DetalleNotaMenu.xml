@@ -21,22 +21,32 @@
         >
     <menu>
      <item 
-        android:id="@+id/submenuYellow"
+        android:id="@+id/submenuDetYellow"
         android:title="Amarillo"
         android:showAsAction="always"
-       android:icon="@mipmap/ic_action_save_alt"/>
+       android:icon="@mipmap/ic_action_image_yellow"
+        />
       <item
-      android:id="@+id/submenuGreen"
+      android:id="@+id/submenuDetGreen"
       android:title="Verde"
-      android:showAsAction="always"/>
+      android:showAsAction="always"
+      android:icon="@mipmap/ic_action_image_green"/>
       <item
-        android:id="@+id/submenuBlue"
+        android:id="@+id/submenuDetBlue"
         android:title="Azul"
-        android:showAsAction="always"/>
+        android:showAsAction="always"
+        android:icon="@mipmap/ic_action_images"/>
       <item
-        android:id="@+id/submenuOrange"
+        android:id="@+id/submenuDetOrange"
         android:title="Naranja"
-        android:showAsAction="always"/>
+        android:showAsAction="always"
+        android:icon="@mipmap/ic_action_image_orange"/>
+      <item
+        android:id="@+id/submenuDetViolet"
+        android:title="Violeta"
+        android:showAsAction="always"
+        android:icon="@mipmap/ic_action_image_violet"
+        />
   </menu>
     </item>
   

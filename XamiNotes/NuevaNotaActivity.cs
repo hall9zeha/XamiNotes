@@ -5,6 +5,8 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -20,6 +22,8 @@ namespace XamiNotes
         EditText nuevaNota, tituloNota;
         MisNotas objNotas;
         LinearLayout nuevaNotaLinear;
+        ColorDrawable colorBackground;
+        //1 = Amarillo, Color por defecto de la nota si no se selecciona ningún color 
         int color = 1;   
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -36,8 +40,8 @@ namespace XamiNotes
             nuevaNota = FindViewById<EditText>(Resource.Id.nuevaNotaEditText);
             tituloNota = FindViewById<EditText>(Resource.Id.tituloEditText);
             nuevaNotaLinear = FindViewById<LinearLayout>(Resource.Id.nuevaNotaLinearLayout);
-            
-
+            nuevaNotaLinear.SetBackgroundColor(Android.Graphics.Color.LightYellow);
+            ActionBar.SetDisplayHomeAsUpEnabled(true);
             // Create your application here
         }
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -47,6 +51,12 @@ namespace XamiNotes
         }
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
+           
+            if (item.ItemId == Android.Resource.Id.Home)
+            {
+                Finish();
+                return true;
+            }
             if (item.TitleFormatted.ToString() == "Guardar")
             {
                 guardarNota();
@@ -56,28 +66,41 @@ namespace XamiNotes
             else if (item.TitleFormatted.ToString() == "Amarillo")
             {
                 color = 1;
-                nuevaNota.SetBackgroundColor(Android.Graphics.Color.LightYellow);
-                nuevaNotaLinear.SetBackgroundColor(Android.Graphics.Color.LightYellow);
+                cambiarColorControles("#FFC107", Android.Graphics.Color.LightYellow);
             }
             else if (item.TitleFormatted.ToString() == "Verde")
             {
                 color = 2;
-                nuevaNota.SetBackgroundColor(Android.Graphics.Color.LightGreen);
-                nuevaNotaLinear.SetBackgroundColor(Android.Graphics.Color.LightGreen);
+                cambiarColorControles("#4CAF50", Android.Graphics.Color.LightGreen);
             }
             else if (item.TitleFormatted.ToString() == "Azul")
             {
                 color = 3;
-                nuevaNota.SetBackgroundColor(Android.Graphics.Color.LightBlue);
-                nuevaNotaLinear.SetBackgroundColor(Android.Graphics.Color.LightBlue);
+                cambiarColorControles("#03A9F4", Android.Graphics.Color.LightBlue);
             }
             else if (item.TitleFormatted.ToString() == "Naranja")
             {
                 color = 4;
-                nuevaNota.SetBackgroundColor(Android.Graphics.Color.LightSalmon);
-                nuevaNotaLinear.SetBackgroundColor(Android.Graphics.Color.LightSalmon);
+                cambiarColorControles("#FF5722", Android.Graphics.Color.LightSalmon);
+            }
+            else if (item.TitleFormatted.ToString() == "Violeta")
+            {
+                color = 5;
+                cambiarColorControles("#673AB7", Android.Graphics.Color.ParseColor("#CE4BEB"));
             }
             return base.OnOptionsItemSelected(item);
+        }
+        void cambiarColorControles(string color, Color color1)
+        {
+            //Colores del layout
+            nuevaNota.SetBackgroundColor(color1);
+            nuevaNotaLinear.SetBackgroundColor(color1);
+            //Colores de los Linear y Toolbar
+            colorBackground = new ColorDrawable(Color.ParseColor(color));
+            ActionBar.SetBackgroundDrawable(colorBackground);
+            //Cambiar el color de la barra de estado
+            Window.SetStatusBarColor(Android.Graphics.Color.ParseColor(color));
+
         }
         public void guardarNota()
         {

@@ -29,8 +29,7 @@ namespace XamiNotes
             Toolbar toolbarNotas = FindViewById<Toolbar>(Resource.Id.toolbarNotas);
             listViewNotas = FindViewById<ListView>(Resource.Id.listViewNotas);
             SetActionBar(toolbarNotas);
-            ActionBar.SetDisplayHomeAsUpEnabled(true);
-            ActionBar.SetDisplayShowTitleEnabled(true);
+            
             ActionBar.Title = "Mis Notas";
 
             listarNotas();
