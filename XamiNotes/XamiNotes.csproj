@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\Metodos.cs" />
+    <Compile Include="Clases\MyAdapter.cs" />
     <Compile Include="DataBase\MisNotasDb.cs" />
     <Compile Include="DetalleNotasActivity.cs" />
     <Compile Include="ListaNotasActivity.cs" />
@@ -351,11 +352,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_action_warning.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\ListaNotasRecyclerlayout.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\CardViewNotalayout.axml">

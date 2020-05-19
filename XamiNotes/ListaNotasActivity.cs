@@ -7,9 +7,13 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.Transitions;
 using Android.Support.V7.App;
+using Android.Support.V7.Widget;
 using Android.Views;
+using Android.Views.Animations;
 using Android.Widget;
+using XamiNotes.Clases;
 using XamiNotes.DataBase;
 using XamiNotes.Modelo;
 
@@ -19,44 +23,61 @@ namespace XamiNotes
     public class ListaNotasActivity : Activity
     {
         List<MisNotas> listaNotas = new List<MisNotas>();
-        ListView listViewNotas;
+        
+        RecyclerView.LayoutManager mLayoutManager;
+        MyAdapter mAdapter;
+        MisNotas objNotas = new MisNotas();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.ListaNotaslayout);
 
-            Toolbar toolbarNotas = FindViewById<Toolbar>(Resource.Id.toolbarNotas);
-            listViewNotas = FindViewById<ListView>(Resource.Id.listViewNotas);
+            Android.Widget.Toolbar toolbarNotas = FindViewById<Android.Widget.Toolbar>(Resource.Id.toolbarNotas);
+
             SetActionBar(toolbarNotas);
-            
+
             ActionBar.Title = "Mis Notas";
 
             listarNotas();
 
-            //Creamos el evento click de los items del listViewNotas
+            transicionSlide();
 
-            listViewNotas.ItemClick += ListViewNotas_ItemClick;
+           
+
         }
-
-        private void ListViewNotas_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        //Crearemos efecto de transición
+        private Slide transicionSlide()
         {
-            //Le pasamos el parámetro de la posición del ítem seleccionado, para que lleve todo su contenido
-            MostrarDetalleNota(e.Position);
-            
+            Slide slide = new Slide();
+            slide.SetDuration(3000);
+            //slide.SetMode(Visibility.ModeOut);
+            slide.SetInterpolator(new OvershootInterpolator());
+            return slide;
+
         }
+       
 
         public void listarNotas()
         {
+            RecyclerView notasRecyclerView = FindViewById<RecyclerView>(Resource.Id.listaNotasRecycler);
+            mLayoutManager = new LinearLayoutManager(this);
+            notasRecyclerView.SetLayoutManager(mLayoutManager);
             listaNotas = MisNotasDb.ListarNotas();
-            if (listaNotas[1].IdColor == 1)
-            {
-                listViewNotas.SetBackgroundColor(Android.Graphics.Color.LightYellow);
-                
-            }
-            ArrayAdapter listaNotasAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, listaNotas);
-            listViewNotas.Adapter = listaNotasAdapter;
+            mAdapter = new MyAdapter(listaNotas);
+            mAdapter.ItemClick += MAdapter_ItemClick;
+            notasRecyclerView.SetAdapter(mAdapter);
+            
+
+
         }
+
+        private void MAdapter_ItemClick(object sender, int posicionNota)
+        {
+            int response = posicionNota;
+            MostrarDetalleNota(response);
+        }
+
         protected override void OnRestart()
         {
             
@@ -76,6 +97,7 @@ namespace XamiNotes
                 Intent intentNuevaNota = new Intent(this, typeof(NuevaNotaActivity));
                 StartActivity(intentNuevaNota);
             }
+            
             else
             { Toast.MakeText(this, "no implementado", ToastLength.Short).Show(); }
 
@@ -103,7 +125,10 @@ namespace XamiNotes
             
             intentDetalleNota.PutExtras(bundleNota);
             StartActivity(intentDetalleNota);
-          
+
+           
+           
+
         }
 
     }
