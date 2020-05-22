@@ -14,24 +14,36 @@
     android:titleTextColor="#ffffff"
     
     
-    >
+    />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/linearTituloNuevaNota"
+         android:background="?android:attr/colorPrimary"
+        android:weightSum="1">
+       
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content" 
             android:id="@+id/tituloEditText"
             android:hint="Título"
-            android:textColorHint="#ffffff"
-            android:textColor="#ffffff"
-            android:layout_marginTop="50dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="left"
+            android:maxLines="1"
+            android:layout_weight="0.3"
+            android:background="@layout/EstiloEditText"
+            
             android:layout_gravity="center"
             android:backgroundTint="#ffffff"
            />
-    </Toolbar>
+         
+   </LinearLayout>
 <ScrollView
   
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-        >
+    >
+
 <EditText
     android:id="@+id/nuevaNotaEditText"
     android:layout_width="match_parent"

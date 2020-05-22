@@ -1,7 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!--For all properties see: http://developer.android.com/guide/topics/resources/menu-resource.html-->
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-  
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res/android">
+  <item android:id="@+id/action_search"
+        android:showAsAction="always"
+        android:icon="@mipmap/ic_action_search"
+        app:iconTint="#ffffff"
+        android:title="Buscar"
+        app:actionViewClass="android.widget.SearchView"
+        />
   <item android:id="@+id/nuevaNota"
          android:showAsAction="ifRoom"
          android:title="Nuevo"

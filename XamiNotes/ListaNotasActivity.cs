@@ -7,7 +7,8 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.Transitions;
+//using Android.Support.Transitions;
+using Android.Transitions;
 using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
@@ -27,13 +28,14 @@ namespace XamiNotes
         RecyclerView.LayoutManager mLayoutManager;
         MyAdapter mAdapter;
         MisNotas objNotas = new MisNotas();
+        Android.Widget.Toolbar toolbarNotas;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.ListaNotaslayout);
 
-            Android.Widget.Toolbar toolbarNotas = FindViewById<Android.Widget.Toolbar>(Resource.Id.toolbarNotas);
+            toolbarNotas = FindViewById<Android.Widget.Toolbar>(Resource.Id.toolbarNotas);
 
             SetActionBar(toolbarNotas);
 
@@ -41,18 +43,21 @@ namespace XamiNotes
 
             listarNotas();
 
-            transicionSlide();
-
-           
+            Window.EnterTransition = transicionSlide();
+            Window.ExitTransition = transicionSlide();
+            Window.ReturnTransition = transicionSlide();
+            //Window.AllowEnterTransitionOverlap=false;
 
         }
         //Crearemos efecto de transición
         private Slide transicionSlide()
         {
-            Slide slide = new Slide();
-            slide.SetDuration(3000);
+            Android.Transitions.Slide slide = new Android.Transitions.Slide(GravityFlags.Left);
+            slide.SetDuration(1000);
             //slide.SetMode(Visibility.ModeOut);
-            slide.SetInterpolator(new OvershootInterpolator());
+            //slide.ExcludeTarget(toolbarNotas, true);
+            
+            slide.SetInterpolator(new DecelerateInterpolator());
             return slide;
 
         }
@@ -74,8 +79,10 @@ namespace XamiNotes
 
         private void MAdapter_ItemClick(object sender, int posicionNota)
         {
+            
             int response = posicionNota;
             MostrarDetalleNota(response);
+
         }
 
         protected override void OnRestart()
@@ -87,6 +94,8 @@ namespace XamiNotes
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             //change main_compat_menu
+            ImageView iconsearch = (ImageView) FindViewById(Resource.Id.search_button);
+
             MenuInflater.Inflate(Resource.Menu.MenuToolbar, menu);
             return base.OnCreateOptionsMenu(menu);
         }
@@ -124,7 +133,7 @@ namespace XamiNotes
             bundleNota.PutString("FechaNota", detalleListaNotas.FechaNota.ToString());
             
             intentDetalleNota.PutExtras(bundleNota);
-            StartActivity(intentDetalleNota);
+            StartActivity(intentDetalleNota, ActivityOptions.MakeSceneTransitionAnimation(this).ToBundle());
 
            
            

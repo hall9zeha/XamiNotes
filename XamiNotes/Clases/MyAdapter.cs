@@ -9,8 +9,11 @@ using Android.Content;
 using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
+//using Android.Support.Transitions;
 using Android.Support.V7.Widget;
+using Android.Transitions;
 using Android.Views;
+using Android.Views.Animations;
 using Android.Widget;
 using XamiNotes.Modelo;
 
@@ -41,8 +44,9 @@ namespace XamiNotes.Clases
         {
             
             View view = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.CardViewNotalayout, parent, false);
-           
+            
             NoteViewHolder nt = new NoteViewHolder(view, OnClick);
+            
             return nt;
 
             
@@ -50,12 +54,11 @@ namespace XamiNotes.Clases
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
 
         {
+            
            
             NoteViewHolder nota = holder as NoteViewHolder;
-           
-
             //Formateamos la fecha para mostra los meses en español y el día
-            string fechaFormateada = notaspublic[position].FechaNota.ToString("MMMM" + " dd", CultureInfo.CreateSpecificCulture("es-US"));
+            string fechaFormateada = notaspublic[position].FechaNota.ToString("MMMM" + " dd", CultureInfo.CreateSpecificCulture("es-PE"));
             var fecha = fechaFormateada.Substring(0, 1).ToUpper() + fechaFormateada.Substring(1).ToLower();
             //*****
             //Cortamos el contenido si es muy grande y lo mostramos en lugar del título si no existe el mismo
@@ -68,10 +71,14 @@ namespace XamiNotes.Clases
                 {
                     cortar = notaspublic[position].Contenido.Length - maxCar;
                     contenidoCortado = notaspublic[position].Contenido.Remove(maxCar, cortar);
-                    nota.notaCard.Text = contenidoCortado +"...";
+                    nota.notaCard.Text = contenidoCortado + "...";
                     nota.fechaNotas.Text = fecha;
                 }
-
+                else if (notaspublic[position].Contenido.Length < maxCar)
+                {
+                    nota.notaCard.Text = notaspublic[position].Contenido;
+                    nota.fechaNotas.Text = fecha;
+                }
                 else
                 {
                     nota.notaCard.Text = notaspublic[position].Titulo;
@@ -116,11 +123,14 @@ namespace XamiNotes.Clases
                 nota.notasCardView.SetCardBackgroundColor(Android.Graphics.Color.ParseColor("#CE4BEB"));
                 nota.separadorCard.SetBackgroundColor(Android.Graphics.Color.ParseColor("#673AB7"));
             }
-          
+
             
+            
+
         }
 
        
+
        
     }
     public class NoteViewHolder : RecyclerView.ViewHolder
@@ -139,6 +149,8 @@ namespace XamiNotes.Clases
             fechaNotas = itemView.FindViewById<TextView>(Resource.Id.textFechaNota);
             separadorCard = itemView.FindViewById<View>(Resource.Id.separadorViewCard);
             itemView.Click += (sender, e) => listener(base.LayoutPosition);
+            notaCard.SetTypeface(Typeface.SansSerif, TypefaceStyle.BoldItalic);
+            fechaNotas.SetTypeface(Typeface.SansSerif, TypefaceStyle.BoldItalic);
         }
     }
    

@@ -9,7 +9,9 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Runtime;
+using Android.Transitions;
 using Android.Views;
+using Android.Views.Animations;
 using Android.Widget;
 using XamiNotes.DataBase;
 using XamiNotes.Modelo;
@@ -23,10 +25,11 @@ namespace XamiNotes
         Toolbar toolbarDetalle;
         EditText tituloDetalle, detalleNota;
         TextView fechaNota;
-        LinearLayout detalleLinear, tituloDetalleLinear;
+        LinearLayout detalleLinear, tituloDetalleLinear, linearTitulo, linearFecha;
         ColorDrawable colorBackground;
-        int idNota, idColor=2;
-        int color = 1;
+        int idNota, idColor, idFont;
+        int color=1;
+        string fechaNotaCreacion;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -39,14 +42,51 @@ namespace XamiNotes
             toolbarDetalle = FindViewById<Toolbar>(Resource.Id.toolbarDetalleNotas);
             detalleLinear = FindViewById<LinearLayout>(Resource.Id.detalleNotaLinearLayout);
             tituloDetalleLinear = FindViewById<LinearLayout>(Resource.Id.tituloDetalleLinear);
+            linearTitulo = FindViewById<LinearLayout>(Resource.Id.linearTitulo);
+            linearFecha = FindViewById<LinearLayout>(Resource.Id.linearFecha);
             SetActionBar(toolbarDetalle);
             ActionBar.Title = "Detalle Nota";
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             CargarDetalleNota();
             //colorear fondo de la nota de acurerdo a el idColor de la tabla
             cargarColorNotas();
+            habilitarControles(false, false, false, false);
 
+            //Android.Graphics.Typeface prueba = this.Resources.GetFont(Resource.);
+            //detalleNota.Typeface = prueba;
+            detalleNota.SetTypeface(Typeface.SansSerif, TypefaceStyle.BoldItalic);
+            Window.EnterTransition = transicion();
+            Window.ExitTransition = transicion();
+            //Window.AllowEnterTransitionOverlap = false;
+        }
+        private Slide transicion()
+        {
+            Slide slide = new Slide(GravityFlags.Right);
+            slide.SetDuration(1000);
+            slide.SetInterpolator(new DecelerateInterpolator());
+            return slide;
+        }
+        void habilitarControles(bool focusTitulo,bool focusNota, bool titulo, bool nota)
+        {
+            
+            tituloDetalle.Enabled=titulo;
+            detalleNota.Enabled = nota;
+            detalleNota.FocusableInTouchMode = focusNota;
+            tituloDetalle.FocusableInTouchMode = focusTitulo;
 
+        }
+        void cambiarFont(int tipoLetra, Typeface font, TypefaceStyle style)
+        {
+            if (tipoLetra == idFont)
+            {
+                detalleNota.SetTypeface(font, style);
+                tituloDetalle.SetTypeface(font, style);
+            }
+            else
+            {
+                detalleNota.SetTypeface(font, style);
+                tituloDetalle.SetTypeface(font, style);
+            }
         }
         void cargarColorNotas()
         {
@@ -80,12 +120,18 @@ namespace XamiNotes
         {
             if (item.ItemId == Android.Resource.Id.Home)
             {
-                Finish();
+               
+                FinishAfterTransition();
                 return true;
             }
             if (item.TitleFormatted.ToString() == "Editar")
             {
                 EditarNota();
+                habilitarControles(false, false, false, false);
+            }
+            if (item.TitleFormatted.ToString() == "EditarNota")
+            {
+                habilitarControles(true, true, true, true);
             }
             else if (item.TitleFormatted.ToString() == "Eliminar")
             {
@@ -96,7 +142,7 @@ namespace XamiNotes
             {
                 color = 1;
                 cambiarColorControles("#FFC107", Android.Graphics.Color.LightYellow);
-                
+
             }
             else if (item.TitleFormatted.ToString() == "Verde")
             {
@@ -117,7 +163,7 @@ namespace XamiNotes
             {
                 color = 5;
                 cambiarColorControles("#673AB7", Android.Graphics.Color.ParseColor("#CE4BEB"));
-                
+
             }
 
             return base.OnOptionsItemSelected(item);
@@ -131,6 +177,8 @@ namespace XamiNotes
             colorBackground = new ColorDrawable(Color.ParseColor(color));
             ActionBar.SetBackgroundDrawable(colorBackground);
             tituloDetalleLinear.SetBackgroundColor(Android.Graphics.Color.ParseColor(color));
+            linearFecha.SetBackgroundColor(Android.Graphics.Color.ParseColor(color));
+            linearTitulo.SetBackgroundColor(Android.Graphics.Color.ParseColor(color));
             //Cambiar el color de la barra de estado
             Window.SetStatusBarColor(Android.Graphics.Color.ParseColor(color));
         }
@@ -142,7 +190,9 @@ namespace XamiNotes
             //cargamos estas variables para usarlas en diversas funciones
             idNota = Intent.Extras.GetInt("IdNotas");
             idColor = Intent.Extras.GetInt("IdColor");
-
+            color = Intent.Extras.GetInt("IdColor");
+            fechaNotaCreacion = Intent.Extras.GetString("FechaNota");
+            
         }
         public void EditarNota()
         {
@@ -151,8 +201,10 @@ namespace XamiNotes
                 IdNotas=idNota,
                 Titulo = tituloDetalle.Text,
                 Contenido = detalleNota.Text,
-                FechaNota = DateTime.Now,
+                FechaNota=Convert.ToDateTime(fechaNotaCreacion.ToString()),
+                FechaModificacion = DateTime.Now,
                 IdColor = color
+
                 
             };
            int respuesta= MisNotasDb.EditarNota(objNota);
@@ -179,7 +231,7 @@ namespace XamiNotes
                     {   
                             Toast.MakeText(this, "Nota Eliminada", ToastLength.Long).Show();
                             Intent intentBack = new Intent(this, typeof(ListaNotasActivity));
-                            StartActivity(intentBack);
+                            StartActivity(intentBack,ActivityOptions.MakeSceneTransitionAnimation(this).ToBundle());
                
                
                     }

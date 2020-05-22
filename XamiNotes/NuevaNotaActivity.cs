@@ -9,6 +9,7 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Runtime;
+using Android.Transitions;
 using Android.Views;
 using Android.Widget;
 using XamiNotes.DataBase;
@@ -21,7 +22,7 @@ namespace XamiNotes
     {
         EditText nuevaNota, tituloNota;
         MisNotas objNotas;
-        LinearLayout nuevaNotaLinear;
+        LinearLayout nuevaNotaLinear, linearTituloNota;
         ColorDrawable colorBackground;
         //1 = Amarillo, Color por defecto de la nota si no se selecciona ningún color 
         int color = 1;   
@@ -40,8 +41,13 @@ namespace XamiNotes
             nuevaNota = FindViewById<EditText>(Resource.Id.nuevaNotaEditText);
             tituloNota = FindViewById<EditText>(Resource.Id.tituloEditText);
             nuevaNotaLinear = FindViewById<LinearLayout>(Resource.Id.nuevaNotaLinearLayout);
+            linearTituloNota = FindViewById<LinearLayout>(Resource.Id.linearTituloNuevaNota);
             nuevaNotaLinear.SetBackgroundColor(Android.Graphics.Color.LightYellow);
             ActionBar.SetDisplayHomeAsUpEnabled(true);
+
+            Explode explode = new Explode();
+            explode.SetDuration(500);
+            Window.EnterTransition = explode;
             // Create your application here
         }
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -49,6 +55,7 @@ namespace XamiNotes
             MenuInflater.Inflate(Resource.Menu.NuevaNotaMenu, menu);
             return base.OnCreateOptionsMenu(menu);
         }
+        
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
            
@@ -60,8 +67,11 @@ namespace XamiNotes
             if (item.TitleFormatted.ToString() == "Guardar")
             {
                 guardarNota();
+                Slide slide = new Slide();
+                slide.SetDuration(500);
+                Window.ExitTransition = slide;
                 Intent intentReturn = new Intent(this, typeof(ListaNotasActivity));
-                StartActivity(intentReturn);
+                StartActivity(intentReturn, ActivityOptions.MakeSceneTransitionAnimation(this).ToBundle());
             }
             else if (item.TitleFormatted.ToString() == "Amarillo")
             {
@@ -95,9 +105,11 @@ namespace XamiNotes
             //Colores del layout
             nuevaNota.SetBackgroundColor(color1);
             nuevaNotaLinear.SetBackgroundColor(color1);
+            linearTituloNota.SetBackgroundColor(Android.Graphics.Color.ParseColor(color));
             //Colores de los Linear y Toolbar
             colorBackground = new ColorDrawable(Color.ParseColor(color));
             ActionBar.SetBackgroundDrawable(colorBackground);
+            
             //Cambiar el color de la barra de estado
             Window.SetStatusBarColor(Android.Graphics.Color.ParseColor(color));
 

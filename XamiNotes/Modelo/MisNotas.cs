@@ -18,10 +18,13 @@ namespace XamiNotes.Modelo
         [PrimaryKey, AutoIncrement ]
         public  int IdNotas { get; set; }
         public  int IdColor { get; set; }
+        public int IdFont { get; set; }
         public  string Titulo { get; set; }
         public  string Contenido { get; set; }
         public  DateTime FechaNota { get; set; }
         public  DateTime Recordatorio { get; set; }
+        public DateTime FechaModificacion { get; set; }
+
         public override string ToString()
         {
             if (Titulo == null||Titulo=="")
