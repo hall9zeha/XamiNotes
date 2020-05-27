@@ -74,6 +74,17 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
+    <AndroidResource Include="Resources\font\lobster.ttf" />
+    <AndroidResource Include="Resources\font\pacifico.ttf" />
+    <AndroidResource Include="Resources\font\presregular.ttf" />
+    <AndroidResource Include="Resources\font\lora_variable.ttf" />
+    <AndroidResource Include="Resources\font\monoton.ttf" />
+    <AndroidResource Include="Resources\font\permanent_maker.ttf" />
+    <AndroidResource Include="Resources\font\bangers.ttf" />
+    <AndroidResource Include="Resources\font\dosisvariable.ttf" />
+    <AndroidResource Include="Resources\font\homemade.ttf" />
+    <AndroidResource Include="Resources\font\Indie_flower.ttf" />
+    <AndroidResource Include="Resources\font\lora_italic.ttf" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_main.axml">
@@ -363,9 +374,7 @@
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\Fonts\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-hdpi\ic_action_lback.png" />
   </ItemGroup>
@@ -412,7 +421,7 @@
     <AndroidResource Include="Resources\mipmap-mdpi\ic_action_palette_dark.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-mdpi\ic_action_search.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_action_found.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-xhdpi\ic_action_send_dark.png" />
@@ -457,7 +466,7 @@
     <AndroidResource Include="Resources\mipmap-xhdpi\ic_action_palette_dark.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xhdpi\ic_action_search.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_action_found.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-xxhdpi\ic_action_send_white.png" />
@@ -499,7 +508,7 @@
     <AndroidResource Include="Resources\mipmap-xxhdpi\ic_action_palette_dark.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_action_search.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_action_found.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-xxhdpi\ic_action_send_dark.png" />
@@ -547,7 +556,7 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_action_palette_dark.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_action_search.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_action_found.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_action_send_dark.png" />
@@ -592,7 +601,7 @@
     <AndroidResource Include="Resources\mipmap-hdpi\ic_action_palette_dark.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-hdpi\ic_action_search.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_action_found.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-hdpi\ic_action_send_dark.png" />

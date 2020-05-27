@@ -9,6 +9,7 @@ using Android.OS;
 using System.IO;
 using XamiNotes.Modelo;
 using Android.Runtime;
+using Java.Lang;
 using Android.Views;
 using Android.Widget;
 using SQLite;
@@ -44,14 +45,15 @@ namespace XamiNotes.DataBase
 
 
         }
-        public static List<MisNotas> ListarNotas()
+        public static JavaList<MisNotas> ListarNotas()
         {
             //using (SQLiteConnection Cnn = new SQLiteConnection(rutaDb))
            
                 Cn.CreateTable<MisNotas>();
-                List<MisNotas> lista = new List<MisNotas>();
-                lista = Cn.Table<MisNotas>().ToList();
-                return lista;
+                JavaList<MisNotas> javaLista;
+                List<MisNotas>lista = Cn.Table<MisNotas>().ToList();
+            javaLista = new JavaList<MisNotas>(lista);
+                return javaLista;
            
         }
         public static int EditarNota(MisNotas objNota)

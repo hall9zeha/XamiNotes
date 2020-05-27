@@ -8,6 +8,8 @@ using Android.Transitions;
 using Android.Views.Animations;
 using Android.Views;
 
+
+
 namespace XamiNotes
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
@@ -33,9 +35,9 @@ namespace XamiNotes
         private Slide transicion()
         {
           Slide slide = new Slide(GravityFlags.Right);
-            slide.SetDuration(1000);
+            slide.SetDuration(500);
             slide.SetInterpolator(new DecelerateInterpolator());
-            //slide.SetMode(Visibility.ModeOut);
+            
 
             return slide;
 

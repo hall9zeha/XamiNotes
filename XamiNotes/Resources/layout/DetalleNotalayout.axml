@@ -22,10 +22,10 @@
         android:orientation="horizontal"
         android:weightSum="1">
          <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent" 
             android:orientation="horizontal"
-            android:layout_weight="0.3"
+            android:layout_weight="0"
             android:id="@+id/linearTitulo"
             android:background="?android:attr/colorPrimary">
 
@@ -46,14 +46,37 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" 
             android:orientation="horizontal"
-            android:layout_weight="0.7"  
+            android:layout_weight="0.5"  
             android:id="@+id/linearFecha"
             android:background="?android:attr/colorPrimary">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:id="@+id/fechaTextView"
                 android:layout_height="wrap_content" 
+                android:layout_marginLeft="3dp"
             android:text="Fecha"
+            android:textColor="#ffffff"
+            
+            android:layout_gravity="center"
+            android:layout_toRightOf="@+id/tituloDetalleEditText"/>
+             
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" 
+            android:orientation="horizontal"
+            android:layout_weight="0.5"  
+            
+            android:id="@+id/linearFechaUpdate"
+            android:background="?android:attr/colorPrimary">
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/fechaUpdateTextView"
+                android:layout_height="wrap_content" 
+                
+            android:layout_marginRight="3dp"
+                android:text="Modificado"
             android:textColor="#ffffff"
             
             android:layout_gravity="center"

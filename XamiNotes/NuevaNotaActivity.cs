@@ -12,6 +12,7 @@ using Android.Runtime;
 using Android.Transitions;
 using Android.Views;
 using Android.Widget;
+using XamiNotes.Clases;
 using XamiNotes.DataBase;
 using XamiNotes.Modelo;
 
@@ -25,7 +26,8 @@ namespace XamiNotes
         LinearLayout nuevaNotaLinear, linearTituloNota;
         ColorDrawable colorBackground;
         //1 = Amarillo, Color por defecto de la nota si no se selecciona ningún color 
-        int color = 1;   
+        int color = 1;
+        int font = 1;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -44,9 +46,9 @@ namespace XamiNotes
             linearTituloNota = FindViewById<LinearLayout>(Resource.Id.linearTituloNuevaNota);
             nuevaNotaLinear.SetBackgroundColor(Android.Graphics.Color.LightYellow);
             ActionBar.SetDisplayHomeAsUpEnabled(true);
-
+            color = Metodos.CambiarColorNotasGeneric(this, null, 0, 1);
             Explode explode = new Explode();
-            explode.SetDuration(500);
+            explode.SetDuration(400);
             Window.EnterTransition = explode;
             // Create your application here
         }
@@ -73,31 +75,8 @@ namespace XamiNotes
                 Intent intentReturn = new Intent(this, typeof(ListaNotasActivity));
                 StartActivity(intentReturn, ActivityOptions.MakeSceneTransitionAnimation(this).ToBundle());
             }
-            else if (item.TitleFormatted.ToString() == "Amarillo")
-            {
-                color = 1;
-                cambiarColorControles("#FFC107", Android.Graphics.Color.LightYellow);
-            }
-            else if (item.TitleFormatted.ToString() == "Verde")
-            {
-                color = 2;
-                cambiarColorControles("#4CAF50", Android.Graphics.Color.LightGreen);
-            }
-            else if (item.TitleFormatted.ToString() == "Azul")
-            {
-                color = 3;
-                cambiarColorControles("#03A9F4", Android.Graphics.Color.LightBlue);
-            }
-            else if (item.TitleFormatted.ToString() == "Naranja")
-            {
-                color = 4;
-                cambiarColorControles("#FF5722", Android.Graphics.Color.LightSalmon);
-            }
-            else if (item.TitleFormatted.ToString() == "Violeta")
-            {
-                color = 5;
-                cambiarColorControles("#673AB7", Android.Graphics.Color.ParseColor("#CE4BEB"));
-            }
+            font = Metodos.RegistrarFont(this, item, tituloNota, nuevaNota, font);
+            color=Metodos.CambiarColorNotasGeneric(this, item, color,1);
             return base.OnOptionsItemSelected(item);
         }
         void cambiarColorControles(string color, Color color1)
@@ -120,8 +99,10 @@ namespace XamiNotes
             objNotas.Titulo = tituloNota.Text;
             objNotas.Contenido = nuevaNota.Text;
             objNotas.FechaNota = DateTime.Now;
+            objNotas.FechaModificacion = DateTime.Now;
             objNotas.Recordatorio = DateTime.Now;
             objNotas.IdColor = color;
+            objNotas.IdFont = font;
 
             int i = MisNotasDb.GuardarNota(objNotas);
             if (i > 0)

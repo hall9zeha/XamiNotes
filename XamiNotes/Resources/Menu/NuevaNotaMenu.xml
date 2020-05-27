@@ -7,11 +7,96 @@
         android:showAsAction="ifRoom"
         android:title="Guardar"
         />
+  <item android:id="@+id/itemNuevaFont"
+        android:showAsAction="always"
+        android:title="Font"
+        android:icon="@mipmap/ic_action_font_white"
+        >
+    <menu>
+      <item
+       android:id="@+id/submenuNewFont1"
+       android:title="Bangers"
+       android:showAsAction="always"
+     />
+      <item
+        android:id="@+id/submenuNewFont2"
+        android:title="Dosis"
+       
+        android:showAsAction="always"
+       android:fontFamily="@font/indie_flower"/>
+      <item
+        android:id="@+id/submenuNewFont3"
+        android:title="HomeMade"
+         
+        android:showAsAction="always"
+         name=" android:fontFamily">
+        @font/lora_italic"
+      </item>
+      <item
+        android:id="@+id/submenuNewFont4"
+        android:title="Lobster"
+        
+        android:showAsAction="always"
+         android:fontFamily="@font/homemade"
+        />
+      <item
+       android:id="@+id/submenuNewFont5"
+       android:title="LoraItalic"
+       
+       android:showAsAction="always"
+        android:fontFamily="@font/presregular"
+        />
+      <item
+       android:id="@+id/submenuNewFont6"
+       android:title="LoraVariable"
+       
+       android:showAsAction="always"
+        android:fontFamily="@font/monoton"
+        />
+      <item
+        android:id="@+id/submenuNewFont7"
+        android:title="Monoton"
+        
+        android:showAsAction="always"
+         android:fontFamily="@font/presregular"
+        />
+      <item
+        android:id="@+id/submenuNewFont8"
+        android:title="Pacifico"
+       
+        android:showAsAction="always"
+         android:fontFamily="@font/presregular"
+        />
+      <item
+        android:id="@+id/submenuNewFont9"
+        android:title="Permanent"
+        
+        android:showAsAction="always"
+         android:fontFamily="@font/presregular"
+        />
+      <item
+        android:id="@+id/submenuNewFont10"
+        android:title="PresRegular"
+       
+        android:showAsAction="always"
+         android:fontFamily="@font/presregular"
+        />
+      <item
+        android:id="@+id/submenuNewFont11"
+        android:title="Indie"
+        
+        android:showAsAction="always"
+         android:fontFamily="@font/presregular"
+        />
+    </menu>
+  </item>
+  
   <item android:id="@+id/colorItem"
         android:icon="@mipmap/ic_action_color_lens"
         android:showAsAction="ifRoom"
         android:title="Color"
         >
+    
     <menu >
       <item 
         android:id="@+id/submenuYellow"

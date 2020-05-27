@@ -15,143 +15,193 @@ using Android.Transitions;
 using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
+using Java.Lang;
 using XamiNotes.Modelo;
+using String = System.String;
 
 namespace XamiNotes.Clases
 {
-    public class MyAdapter : RecyclerView.Adapter
+    public class MyAdapter : RecyclerView.Adapter,IFilterable
     {
-
-        public List<MisNotas> notaspublic;
-        public MyAdapter(List<MisNotas> notasPublic)
+       
+        public JavaList<MisNotas> notaspublic;
+        private readonly JavaList<MisNotas> listaFiltrada;
+        public RecyclerView recyclerNota;
+        //Primera sobrecarga del constructor
+        public MyAdapter(JavaList<MisNotas> notasPublic, RecyclerView recyclerNota, Activity activity)
         {
             notaspublic = notasPublic;
+            listaFiltrada = notasPublic;
+            this.recyclerNota = recyclerNota;
+            this._context = activity;
         }
-        public event EventHandler<int> ItemClick;
+        //******************************
         private int resource;
-        private Activity activity;
-        private List<MisNotas> lista;
+        public readonly Activity _context;
+        
         public override int ItemCount
         {
-            get { return notaspublic.Count(); }
+            get { return notaspublic.Size(); }
         }
-        void OnClick(int position)
+        //implementamos interfaz de IFilterable
+        public Filter Filter
         {
-            if (ItemClick != null)
-                ItemClick(this, position);
+            get { return NotasFilter.nuevoFiltro(this, listaFiltrada); }
         }
+        
+        public void setNotasFiltradas(JavaList<MisNotas> notasFiltradas)
+        {
+            notaspublic = notasFiltradas;
+        }
+        
+       
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             
             View view = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.CardViewNotalayout, parent, false);
             
-            NoteViewHolder nt = new NoteViewHolder(view, OnClick);
+            NoteViewHolder nt = new NoteViewHolder(view);
             
             return nt;
-
             
+
         }
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
 
         {
-            
-           
+          
             NoteViewHolder nota = holder as NoteViewHolder;
-            //Formateamos la fecha para mostra los meses en español y el día
-            string fechaFormateada = notaspublic[position].FechaNota.ToString("MMMM" + " dd", CultureInfo.CreateSpecificCulture("es-PE"));
-            var fecha = fechaFormateada.Substring(0, 1).ToUpper() + fechaFormateada.Substring(1).ToLower();
-            //*****
-            //Cortamos el contenido si es muy grande y lo mostramos en lugar del título si no existe el mismo
-            if (notaspublic[position].Titulo == null || notaspublic[position].Titulo == "")
+            if (nota != null)
             {
-                int cortar = 0;
-                int maxCar = 30;
-                string contenidoCortado = "";
-                if (notaspublic[position].Contenido.Length > maxCar)
+               //Usamos este método para construir los elementos a mostrar en cada cardview con el contenido de cada nota  que tengamos
+                Metodos.FormatoTextoYFechaContenido(notaspublic[position].Titulo, notaspublic[position].Contenido, notaspublic[position].FechaNota, nota.notaCard, nota.fechaNotas);
+                nota.item.Click -= Item_Click;
+                nota.item.Click += Item_Click;
+                //*************
+            }
+           //Creamos las notas con colores de fondo para cada nota
+            Metodos.CambiarColorNotaHolder(nota.separadorCard, nota.notasCardView, notaspublic[position].IdColor);
+            //Cargamos el tipo de letra para cada target o nota
+            Metodos.CambiarFont(notaspublic[position].IdFont, _context, nota.notaCard, nota.fechaNotas);
+            
+
+        }
+
+        private void Item_Click(object sender, EventArgs e)
+        {
+            int position = this.recyclerNota.GetChildAdapterPosition((View)sender);
+            //MisNotas notasClicked = notaspublic[position];
+            //if (notasClicked.Titulo != null)
+            //{
+            //    Toast.MakeText(this._context, "El Titulo es " + notaspublic[position].Titulo.ToString(), ToastLength.Short).Show();
+            //}
+            
+
+            Intent intentDetalleNota = new Intent(this._context, typeof(DetalleNotasActivity));
+            Bundle bundleNota = new Bundle();
+            bundleNota.PutInt("IdNotas", notaspublic[position].IdNotas);
+            bundleNota.PutInt("IdColor", notaspublic[position].IdColor);
+            bundleNota.PutInt("IdFont", notaspublic[position].IdFont);
+            bundleNota.PutString("Titulo", notaspublic[position].Titulo);
+            bundleNota.PutString("Contenido", notaspublic[position].Contenido);
+            bundleNota.PutString("FechaNota", notaspublic[position].FechaNota.ToString());
+            bundleNota.PutString("FechaModificacion", notaspublic[position].FechaModificacion.ToString());
+            intentDetalleNota.PutExtras(bundleNota);
+
+            Slide slide = new Slide(GravityFlags.Right);
+            slide.SetDuration(600);
+            slide.SetInterpolator(new DecelerateInterpolator());
+            _context.Window.ExitTransition = slide;
+            _context.Window.EnterTransition = slide;
+            _context.Window.ReturnTransition = slide;
+            this._context.StartActivity(intentDetalleNota,ActivityOptions.MakeSceneTransitionAnimation(_context).ToBundle());
+
+
+        }
+
+        //***Creamos la clase para filtrar el recycler view
+        private class NotasFilter : Filter
+        {
+            static JavaList<MisNotas> listaActual;
+            static  MyAdapter _notasAdapter;
+            public static NotasFilter nuevoFiltro(MyAdapter notasAdapter, JavaList<MisNotas> lista)
+            {
+                _notasAdapter = notasAdapter;
+                listaActual = lista;
+                return new NotasFilter();
+            }
+            
+            protected override FilterResults PerformFiltering(ICharSequence constraint)
+            {
+                MisNotas objnota;
+                FilterResults filterResults = new FilterResults();
+                if (constraint != null && constraint.Length() > 0)
                 {
-                    cortar = notaspublic[position].Contenido.Length - maxCar;
-                    contenidoCortado = notaspublic[position].Contenido.Remove(maxCar, cortar);
-                    nota.notaCard.Text = contenidoCortado + "...";
-                    nota.fechaNotas.Text = fecha;
-                }
-                else if (notaspublic[position].Contenido.Length < maxCar)
-                {
-                    nota.notaCard.Text = notaspublic[position].Contenido;
-                    nota.fechaNotas.Text = fecha;
+                    string query = constraint.ToString().ToUpper();
+                    JavaList<MisNotas> notasEncontradas = new JavaList<MisNotas>();
+                    for (int i = 0; i < listaActual.Size(); i++)
+                    {
+                        objnota = new MisNotas();
+                        objnota.Contenido= listaActual[i].Contenido;
+
+
+                        if (objnota.Contenido.ToUpper().Contains(query.ToString())) 
+                        {
+                            objnota.Contenido = listaActual[i].Contenido;
+                            objnota.Titulo = listaActual[i].Titulo;
+                            objnota.FechaNota = listaActual[i].FechaNota;
+                            objnota.IdColor = listaActual[i].IdColor;
+                            objnota.IdFont = listaActual[i].IdFont;
+                            notasEncontradas.Add(objnota);
+                            
+                        }
+                    }
+                    filterResults.Count = notasEncontradas.Size();
+                    filterResults.Values = notasEncontradas;
                 }
                 else
                 {
-                    nota.notaCard.Text = notaspublic[position].Titulo;
-                    nota.fechaNotas.Text = fecha;
+                    //NO ITEM FOUND.LIST REMAINS INTACT
+                    filterResults.Count = listaActual.Size();
+                    filterResults.Values = listaActual;
                 }
-            }
-            else
-
-            {
-                nota.notaCard.Text = notaspublic[position].Titulo;
-                nota.fechaNotas.Text = fecha;
-            }
-            //*************
-            //Creamos las notas con colores de fondo para cada nota
-            if (notaspublic[position].IdColor == 1)
-            {
-
-                nota.notasCardView.SetCardBackgroundColor(Android.Graphics.Color.LightYellow);
-                nota.separadorCard.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFC107"));
-            }
-            else if (notaspublic[position].IdColor == 2)
-            {
-                
-                nota.notasCardView.SetCardBackgroundColor(Android.Graphics.Color.LightGreen);
-                nota.separadorCard.SetBackgroundColor(Android.Graphics.Color.ParseColor("#4CAF50"));
-            }
-            else if (notaspublic[position].IdColor == 3)
-            {
-                
-                nota.notasCardView.SetCardBackgroundColor(Android.Graphics.Color.LightBlue);
-                nota.separadorCard.SetBackgroundColor(Android.Graphics.Color.ParseColor("#03A9F4"));
-            }
-            else if (notaspublic[position].IdColor == 4)
-            {
-                
-                nota.notasCardView.SetCardBackgroundColor(Android.Graphics.Color.LightSalmon);
-                nota.separadorCard.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FF5722"));
-            }
-            else if (notaspublic[position].IdColor == 5)
-            {
-                
-                nota.notasCardView.SetCardBackgroundColor(Android.Graphics.Color.ParseColor("#CE4BEB"));
-                nota.separadorCard.SetBackgroundColor(Android.Graphics.Color.ParseColor("#673AB7"));
+                return filterResults;
             }
 
-            
-            
-
+            protected override void PublishResults(ICharSequence constraint, FilterResults results)
+            {
+                _notasAdapter.setNotasFiltradas((JavaList<MisNotas>)results.Values);
+                _notasAdapter.NotifyDataSetChanged();
+            }
         }
+        //********
 
-       
-
-       
     }
     public class NoteViewHolder : RecyclerView.ViewHolder
     {
-       
+        public View item { get; set; }
         public TextView notaCard;
-        public TextView fechaNotas;
+        public TextView fechaNotas, fechaModificacion;
         public View separadorCard;
         public CardView notasCardView;
 
-        public NoteViewHolder(View itemView, Action<int> listener) : base(itemView)
+        public NoteViewHolder(View itemView) : base(itemView)
         {
             // Locate and cache view references:
+            this.item = itemView;
             notasCardView = itemView.FindViewById<CardView>(Resource.Id.cardNotes);
             notaCard = itemView.FindViewById<TextView>(Resource.Id.textCardView);
             fechaNotas = itemView.FindViewById<TextView>(Resource.Id.textFechaNota);
+            fechaModificacion = itemView.FindViewById<TextView>(Resource.Id.fechaUpdateTextView);
             separadorCard = itemView.FindViewById<View>(Resource.Id.separadorViewCard);
-            itemView.Click += (sender, e) => listener(base.LayoutPosition);
+           
             notaCard.SetTypeface(Typeface.SansSerif, TypefaceStyle.BoldItalic);
             fechaNotas.SetTypeface(Typeface.SansSerif, TypefaceStyle.BoldItalic);
+
+            
         }
+
     }
    
+
 }

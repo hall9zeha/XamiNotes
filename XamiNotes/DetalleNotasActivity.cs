@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -9,10 +10,14 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Runtime;
+
+using Android.Text;
+using Android.Text.Style;
 using Android.Transitions;
 using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
+using XamiNotes.Clases;
 using XamiNotes.DataBase;
 using XamiNotes.Modelo;
 
@@ -23,9 +28,9 @@ namespace XamiNotes
     {
 
         Toolbar toolbarDetalle;
-        EditText tituloDetalle, detalleNota;
-        TextView fechaNota;
-        LinearLayout detalleLinear, tituloDetalleLinear, linearTitulo, linearFecha;
+        EditText tituloDetalle, detalleNota ;
+        TextView fechaNota, fechaModificacion;
+        LinearLayout detalleLinear, tituloDetalleLinear, linearTitulo, linearFecha, linearFechaUpdate;
         ColorDrawable colorBackground;
         int idNota, idColor, idFont;
         int color=1;
@@ -39,30 +44,37 @@ namespace XamiNotes
             tituloDetalle = FindViewById<EditText>(Resource.Id.tituloDetalleEditText);
             detalleNota = FindViewById<EditText>(Resource.Id.detalleNotaEditText);
             fechaNota = FindViewById<TextView>(Resource.Id.fechaTextView);
+            fechaModificacion = FindViewById<TextView>(Resource.Id.fechaUpdateTextView);
             toolbarDetalle = FindViewById<Toolbar>(Resource.Id.toolbarDetalleNotas);
             detalleLinear = FindViewById<LinearLayout>(Resource.Id.detalleNotaLinearLayout);
             tituloDetalleLinear = FindViewById<LinearLayout>(Resource.Id.tituloDetalleLinear);
             linearTitulo = FindViewById<LinearLayout>(Resource.Id.linearTitulo);
             linearFecha = FindViewById<LinearLayout>(Resource.Id.linearFecha);
+            linearFechaUpdate = FindViewById<LinearLayout>(Resource.Id.linearFechaUpdate);
             SetActionBar(toolbarDetalle);
             ActionBar.Title = "Detalle Nota";
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             CargarDetalleNota();
             //colorear fondo de la nota de acurerdo a el idColor de la tabla
-            cargarColorNotas();
+
+            color = Metodos.CambiarColorNotasGeneric(this, null, idColor,2);
+            
             habilitarControles(false, false, false, false);
 
-            //Android.Graphics.Typeface prueba = this.Resources.GetFont(Resource.);
-            //detalleNota.Typeface = prueba;
-            detalleNota.SetTypeface(Typeface.SansSerif, TypefaceStyle.BoldItalic);
+            //cambiando font del detalle nota
+            //cambiarFont();
+            
             Window.EnterTransition = transicion();
             Window.ExitTransition = transicion();
+            Window.ReturnTransition = transicion();
             //Window.AllowEnterTransitionOverlap = false;
+           
         }
+        
         private Slide transicion()
         {
             Slide slide = new Slide(GravityFlags.Right);
-            slide.SetDuration(1000);
+            slide.SetDuration(400);
             slide.SetInterpolator(new DecelerateInterpolator());
             return slide;
         }
@@ -75,46 +87,13 @@ namespace XamiNotes
             tituloDetalle.FocusableInTouchMode = focusTitulo;
 
         }
-        void cambiarFont(int tipoLetra, Typeface font, TypefaceStyle style)
-        {
-            if (tipoLetra == idFont)
-            {
-                detalleNota.SetTypeface(font, style);
-                tituloDetalle.SetTypeface(font, style);
-            }
-            else
-            {
-                detalleNota.SetTypeface(font, style);
-                tituloDetalle.SetTypeface(font, style);
-            }
-        }
-        void cargarColorNotas()
-        {
-            if (idColor == 1)
-            {
-                cambiarColorControles("#FFC107", Android.Graphics.Color.LightYellow);
-            }
-            else if (idColor == 2)
-            {
-                cambiarColorControles("#4CAF50", Android.Graphics.Color.LightGreen);
-            }
-            else if (idColor == 3)
-            {
-                cambiarColorControles("#03A9F4", Android.Graphics.Color.LightBlue);
-            }
-            else if (idColor == 4)
-            {
-                cambiarColorControles("#FF5722", Android.Graphics.Color.LightSalmon);
-            }
-            else if (idColor == 5)
-            {
-                cambiarColorControles("#673AB7", Android.Graphics.Color.ParseColor("#CE4BEB"));
-            }
-        }
+             
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.DetalleNotaMenu,menu);
+            //var xamifont = Typeface.CreateFromAsset(Assets, "@font/pacifico.ttf");
             return base.OnCreateOptionsMenu(menu);
+            
         }
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
@@ -138,50 +117,12 @@ namespace XamiNotes
                 EliminarNota();
             }
 
-            else if (item.TitleFormatted.ToString() == "Amarillo")
-            {
-                color = 1;
-                cambiarColorControles("#FFC107", Android.Graphics.Color.LightYellow);
 
-            }
-            else if (item.TitleFormatted.ToString() == "Verde")
-            {
-                color = 2;
-                cambiarColorControles("#4CAF50", Android.Graphics.Color.LightGreen);
-            }
-            else if (item.TitleFormatted.ToString() == "Azul")
-            {
-                color = 3;
-                cambiarColorControles("#03A9F4", Android.Graphics.Color.LightBlue);
-            }
-            else if (item.TitleFormatted.ToString() == "Naranja")
-            {
-                color = 4;
-                cambiarColorControles("#FF5722", Android.Graphics.Color.LightSalmon);
-            }
-            else if (item.TitleFormatted.ToString() == "Violeta")
-            {
-                color = 5;
-                cambiarColorControles("#673AB7", Android.Graphics.Color.ParseColor("#CE4BEB"));
-
-            }
-
-            return base.OnOptionsItemSelected(item);
+                color = Metodos.CambiarColorNotasGeneric(this, item, idColor,2);
+                idFont = Metodos.RegistrarFont(this,item, tituloDetalle, detalleNota, idFont);
+                return base.OnOptionsItemSelected(item);
         }
-        void cambiarColorControles(string color, Color color1)
-        {
-            //Colores del layout
-            detalleNota.SetBackgroundColor(color1);
-            detalleLinear.SetBackgroundColor(color1);
-            //Colores de los Linear y Toolbar
-            colorBackground = new ColorDrawable(Color.ParseColor(color));
-            ActionBar.SetBackgroundDrawable(colorBackground);
-            tituloDetalleLinear.SetBackgroundColor(Android.Graphics.Color.ParseColor(color));
-            linearFecha.SetBackgroundColor(Android.Graphics.Color.ParseColor(color));
-            linearTitulo.SetBackgroundColor(Android.Graphics.Color.ParseColor(color));
-            //Cambiar el color de la barra de estado
-            Window.SetStatusBarColor(Android.Graphics.Color.ParseColor(color));
-        }
+       
         public void CargarDetalleNota()
         {
             tituloDetalle.Text = Intent.Extras.GetString("Titulo");
@@ -190,9 +131,29 @@ namespace XamiNotes
             //cargamos estas variables para usarlas en diversas funciones
             idNota = Intent.Extras.GetInt("IdNotas");
             idColor = Intent.Extras.GetInt("IdColor");
+            idFont = Intent.Extras.GetInt("IdFont");
             color = Intent.Extras.GetInt("IdColor");
-            fechaNotaCreacion = Intent.Extras.GetString("FechaNota");
             
+            fechaNotaCreacion = Intent.Extras.GetString("FechaNota");
+            fechaModificacion.Text= Intent.Extras.GetString("FechaModificacion");
+            Metodos.CambiarFont(idFont, this, detalleNota, tituloDetalle);
+
+            DateTime fechaNotaRegistrada = Convert.ToDateTime(fechaModificacion.Text);
+            DateTime fechaNotaCorta = fechaNotaRegistrada.AddHours(23).AddMinutes(59).AddSeconds(59);
+            var fechaRegistro = DateTime.Compare(fechaNotaCorta, DateTime.Now);
+            if (fechaRegistro == -1)
+            {
+                DateTime fechaObj= Convert.ToDateTime(Intent.Extras.GetString("FechaModificacion"));
+                fechaModificacion.Text ="Modificado" + fechaObj.ToString(" MMMM" +" dd", CultureInfo.CreateSpecificCulture("es-PE"));
+
+            }
+            else
+            {
+                
+                String fechaEnLetras = "Modificado Hoy";
+                fechaModificacion.Text = fechaEnLetras;
+            }
+
         }
         public void EditarNota()
         {
@@ -203,7 +164,9 @@ namespace XamiNotes
                 Contenido = detalleNota.Text,
                 FechaNota=Convert.ToDateTime(fechaNotaCreacion.ToString()),
                 FechaModificacion = DateTime.Now,
-                IdColor = color
+                IdColor = color,
+                IdFont=idFont
+                
 
                 
             };
