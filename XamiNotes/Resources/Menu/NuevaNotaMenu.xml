@@ -12,7 +12,8 @@
         android:title="Font"
         android:icon="@mipmap/ic_action_font_white"
         >
-    <menu>
+    <menu android:id="@+id/menuFont"
+          android:title="MenuFont">
       <item
        android:id="@+id/submenuNewFont1"
        android:title="Bangers"
@@ -97,7 +98,8 @@
         android:title="Color"
         >
     
-    <menu >
+    <menu android:id="@+id/menuColor"
+          android:title="MenuColor" >
       <item 
         android:id="@+id/submenuYellow"
         android:title="Amarillo"

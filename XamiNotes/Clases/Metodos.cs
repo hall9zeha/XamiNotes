@@ -356,7 +356,7 @@ namespace XamiNotes.Clases
                 nuevaNotaLinear = activity.FindViewById<LinearLayout>(Resource.Id.nuevaNotaLinearLayout);
                 linearTituloNota = activity.FindViewById<LinearLayout>(Resource.Id.linearTituloNuevaNota);
 
-                nuevaNota.SetBackgroundColor(Android.Graphics.Color.ParseColor(color));
+                nuevaNota.SetBackgroundColor(color1);
                 tituloNota.SetBackgroundColor(color1);
                 nuevaNotaLinear.SetBackgroundColor(color1);
                 linearTituloNota.SetBackgroundColor(Android.Graphics.Color.ParseColor(color));

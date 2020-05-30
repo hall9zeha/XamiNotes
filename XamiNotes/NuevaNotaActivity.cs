@@ -21,6 +21,7 @@ namespace XamiNotes
     [Activity(Label = "NuevaNotaActivity")]
     public class NuevaNotaActivity : Activity
     {
+        
         EditText nuevaNota, tituloNota;
         MisNotas objNotas;
         LinearLayout nuevaNotaLinear, linearTituloNota;
@@ -50,6 +51,9 @@ namespace XamiNotes
             Explode explode = new Explode();
             explode.SetDuration(400);
             Window.EnterTransition = explode;
+
+            tituloNota.FocusableInTouchMode = true;
+            nuevaNota.FocusableInTouchMode = true;
             // Create your application here
         }
         public override bool OnCreateOptionsMenu(IMenu menu)
