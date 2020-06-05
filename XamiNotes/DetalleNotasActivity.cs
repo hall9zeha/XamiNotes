@@ -121,17 +121,17 @@ namespace XamiNotes
             else if (item.TitleFormatted.ToString() == "Amarillo")
             {
                 color = 1;
-                cambiarColorControles( "#FFC107", Android.Graphics.Color.LightYellow);
+                cambiarColorControles("#FFC107", Android.Graphics.Color.LightYellow);
             }
             else if (item.TitleFormatted.ToString() == "Verde")
             {
                 color = 2;
-                cambiarColorControles( "#4CAF50", Android.Graphics.Color.LightGreen);
+                cambiarColorControles("#4CAF50", Android.Graphics.Color.LightGreen);
             }
             else if (item.TitleFormatted.ToString() == "Azul")
             {
                 color = 3;
-                cambiarColorControles( "#03A9F4", Android.Graphics.Color.LightBlue);
+                cambiarColorControles("#03A9F4", Android.Graphics.Color.LightBlue);
             }
             else if (item.TitleFormatted.ToString() == "Naranja")
             {
@@ -141,7 +141,7 @@ namespace XamiNotes
             else if (item.TitleFormatted.ToString() == "Violeta")
             {
                 color = 5;
-                cambiarColorControles( "#673AB7", Android.Graphics.Color.ParseColor("#CE4BEB"));
+                cambiarColorControles("#673AB7", Android.Graphics.Color.ParseColor("#CE4BEB"));
             }
 
             //Problema al usar dos métodos sin el condicional if solo el último guardaba los datos enteros
@@ -156,6 +156,7 @@ namespace XamiNotes
 
             return base.OnOptionsItemSelected(item);
         }
+        
         void cambiarColorControles(string color, Color color1)
         {
             
@@ -241,7 +242,7 @@ namespace XamiNotes
             alert.SetTitle("Advertencia");
             alert.SetMessage("Realmente quiere eliminar esta nota?");
             alert.SetIcon(Resource.Mipmap.ic_action_warning);
-            alert.SetButton("OK", (c, ev) =>
+            alert.SetButton("SI", (c, ev) =>
             {
                     int respuesta = MisNotasDb.EliminarNota(objNota);
                     if (respuesta > 0)
@@ -255,7 +256,7 @@ namespace XamiNotes
                     else
                         Toast.MakeText(this, "Se produjo un error", ToastLength.Short).Show();
                     });
-            alert.SetButton2("CANCEL", (c, ev) => {
+            alert.SetButton2("NO", (c, ev) => {
 
                 Toast.MakeText(this, "Cancelado", ToastLength.Long).Show();
             });

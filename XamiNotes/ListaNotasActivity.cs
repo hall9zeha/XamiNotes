@@ -19,17 +19,20 @@ using XamiNotes.DataBase;
 using XamiNotes.Modelo;
 using SearchView = Android.Widget.SearchView;
 using Android.Support.V4.View;
+using Android.Support.Design.Widget;
 
 namespace XamiNotes
 {
     [Activity( Label = "@string/app_name", Theme = "@style/AppTheme")]
     public class ListaNotasActivity : Activity
     {
+        Dialog popMenu;
         JavaList<MisNotas> listaNotas = new JavaList<MisNotas>();
         RecyclerView listaRecycler;
         RecyclerView.LayoutManager mLayoutManager;
+        FloatingActionButton fbNuevaNota;
         MyAdapter mAdapter;
-        
+        TextView optionNota, optionLista;
         MisNotas objNotas = new MisNotas();
         Android.Widget.Toolbar toolbarNotas;
         static SearchView searchViewNotas;
@@ -40,22 +43,59 @@ namespace XamiNotes
             listaRecycler = FindViewById<RecyclerView>(Resource.Id.listaNotasRecycler);
             toolbarNotas = FindViewById<Android.Widget.Toolbar>(Resource.Id.toolbarNotas);
             searchViewNotas = FindViewById<SearchView>(Resource.Id.action_search);
-           
+            fbNuevaNota = FindViewById<FloatingActionButton>(Resource.Id.fbNuevaNota);
 
             SetActionBar(toolbarNotas);
 
             ActionBar.Title = "Mis Notas";
 
             listarNotas();
-            
+            fbNuevaNota.Click += FbNuevaNota_Click;
+           
             Window.EnterTransition = transicionSlide();
             Window.ExitTransition = transicionSlide();
             Window.ReturnTransition = transicionSlide();
-            //Window.AllowEnterTransitionOverlap=false;
+            Window.AllowEnterTransitionOverlap = false;
             //searchViewNotas.QueryTextChange += SearchViewNotas_QueryTextChange;
 
-          
+
         }
+        //Al presionar el FloatButton se mostrará un Popup que contiene unos controles para las opciones de nota o lista de tareas
+        private void FbNuevaNota_Click(object sender, EventArgs e)
+        {
+            popMenu = new Dialog(this);
+            popMenu.SetContentView(Resource.Layout.OptionsNotePopUp);
+            popMenu.Window.SetSoftInputMode(SoftInput.AdjustResize);
+            //popMenu.SetCancelable(true);
+
+            popMenu.Show();
+
+            popMenu.Window.SetLayout(WindowManagerLayoutParams.WrapContent, WindowManagerLayoutParams.WrapContent);
+            popMenu.Window.SetBackgroundDrawableResource(Android.Resource.Color.Transparent);
+            optionNota = popMenu.FindViewById<TextView>(Resource.Id.textViewNota);
+            optionLista = popMenu.FindViewById<TextView>(Resource.Id.textViewLista);
+            optionNota.Click += OptionNota_Click;
+            optionLista.Click += OptionLista_Click;
+        }
+
+        private void OptionLista_Click(object sender, EventArgs e)
+        {
+            popMenu.Dismiss();
+            popMenu.Hide();
+            Toast.MakeText(this, "No implementado aún", ToastLength.Short).Show();
+        }
+
+        private void OptionNota_Click(object sender, EventArgs e)
+
+        {
+            popMenu.Dismiss();
+            popMenu.Hide();
+            Intent intentNuevaNota = new Intent(this, typeof(NuevaNotaActivity));
+            StartActivity(intentNuevaNota);
+        }
+
+
+
         //**************************
         private class SearchViewExpandListener : Java.Lang.Object, MenuItemCompat.IOnActionExpandListener
         {
@@ -152,8 +192,10 @@ namespace XamiNotes
         {
             if (item.TitleFormatted.ToString() == "Nuevo")
             {
-                Intent intentNuevaNota = new Intent(this, typeof(NuevaNotaActivity));
-                StartActivity(intentNuevaNota);
+               
+                //Intent intentNuevaNota = new Intent(this, typeof(NuevaNotaActivity));
+                //StartActivity(intentNuevaNota);
+               
             }
             
             else
@@ -166,6 +208,18 @@ namespace XamiNotes
            
 
         }
+
+        //Creamos el PopUp menu para escoger la opcion crear  notas o lista de tareas
+        void MenuOptionsNote( )
+        {
+           
+           
+               
+           
+        }
+
+      
+
         public void MostrarDetalleNota(int posicion)
         {
             //para buscar los datos en el listview que previamente debe estar cargado con la lista, no tenemos que crear una 

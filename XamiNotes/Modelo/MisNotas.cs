@@ -12,8 +12,10 @@ using Android.Widget;
 using SQLite;
 namespace XamiNotes.Modelo
 {
+
    public class MisNotas
     {
+       
 
         [PrimaryKey, AutoIncrement ]
         public  int IdNotas { get; set; }
@@ -24,6 +26,8 @@ namespace XamiNotes.Modelo
         public  DateTime FechaNota { get; set; }
         public  DateTime Recordatorio { get; set; }
         public DateTime FechaModificacion { get; set; }
+        
+       
 
         public override string ToString()
         {
