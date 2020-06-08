@@ -24,7 +24,7 @@ namespace XamiNotes
         
         EditText nuevaNota, tituloNota;
         MisNotas objNotas;
-        LinearLayout nuevaNotaLinear, linearTituloNota;
+        LinearLayout nuevaNotaLinear, linearTituloNota, notaCanvasLayout;
         ColorDrawable colorBackground;
         //1 = Amarillo, Color por defecto de la nota si no se selecciona ningún color 
         int color = 1;
@@ -40,10 +40,11 @@ namespace XamiNotes
             var menuToolbar = FindViewById<Toolbar>(Resource.Id.toolbarMenuNotas);
             SetActionBar(menuToolbar);
             ActionBar.Title = "Nueva Nota";
-
+            LienzoDraw linea = new LienzoDraw(this);
             nuevaNota = FindViewById<EditText>(Resource.Id.nuevaNotaEditText);
             tituloNota = FindViewById<EditText>(Resource.Id.tituloEditText);
             nuevaNotaLinear = FindViewById<LinearLayout>(Resource.Id.nuevaNotaLinearLayout);
+            notaCanvasLayout = FindViewById<LinearLayout>(Resource.Id.notaLinearLayout);
             linearTituloNota = FindViewById<LinearLayout>(Resource.Id.linearTituloNuevaNota);
             nuevaNotaLinear.SetBackgroundColor(Android.Graphics.Color.LightYellow);
             ActionBar.SetDisplayHomeAsUpEnabled(true);
@@ -51,7 +52,7 @@ namespace XamiNotes
             Explode explode = new Explode();
             explode.SetDuration(400);
             Window.EnterTransition = explode;
-
+            notaCanvasLayout.AddView(linea);
             tituloNota.FocusableInTouchMode = true;
             nuevaNota.FocusableInTouchMode = true;
             // Create your application here
@@ -61,7 +62,32 @@ namespace XamiNotes
             MenuInflater.Inflate(Resource.Menu.NuevaNotaMenu, menu);
             return base.OnCreateOptionsMenu(menu);
         }
-        
+        //El método funciona para dibujar lineas en le layout solo que el edit text interfiere en el buzquemos soluciones
+        public class LienzoDraw : View
+        {
+
+            public LienzoDraw(Context context) : base(context)
+            {
+
+            }
+
+            protected override void OnDraw(Android.Graphics.Canvas canvas)
+            {
+                int ancho = canvas.Width;
+                Paint colorLine = new Paint();
+
+                colorLine.Color = Android.Graphics.Color.ParseColor("#673AB7");
+                colorLine.StrokeWidth = 4;
+                canvas.DrawLine(0, 30, ancho, 30, colorLine);
+                canvas.DrawLine(0, 80, ancho, 80, colorLine);
+                canvas.DrawLine(0, 160, ancho, 160, colorLine);
+                canvas.DrawLine(0, 260, ancho, 260, colorLine);
+                canvas.DrawLine(0, 360, ancho, 360, colorLine);
+                canvas.DrawLine(0, 460, ancho, 460, colorLine);
+                base.OnDraw(canvas);
+
+            }
+        }
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
            

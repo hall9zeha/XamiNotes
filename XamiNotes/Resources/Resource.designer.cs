@@ -2532,17 +2532,17 @@ namespace XamiNotes
 			// aapt resource value: 0x7f0a0033
 			public const int CTRL = 2131361843;
 			
-			// aapt resource value: 0x7f0a00e1
-			public const int Editar = 2131362017;
-			
 			// aapt resource value: 0x7f0a00e2
-			public const int Eliminar = 2131362018;
+			public const int Editar = 2131362018;
+			
+			// aapt resource value: 0x7f0a00e3
+			public const int Eliminar = 2131362019;
 			
 			// aapt resource value: 0x7f0a0034
 			public const int FUNCTION = 2131361844;
 			
-			// aapt resource value: 0x7f0a00e4
-			public const int Guardarh = 2131362020;
+			// aapt resource value: 0x7f0a00e5
+			public const int Guardarh = 2131362021;
 			
 			// aapt resource value: 0x7f0a0035
 			public const int META = 2131361845;
@@ -2604,8 +2604,8 @@ namespace XamiNotes
 			// aapt resource value: 0x7f0a005c
 			public const int action_mode_close_button = 2131361884;
 			
-			// aapt resource value: 0x7f0a00df
-			public const int action_search = 2131362015;
+			// aapt resource value: 0x7f0a00e0
+			public const int action_search = 2131362016;
 			
 			// aapt resource value: 0x7f0a00ad
 			public const int action_text = 2131361965;
@@ -2679,14 +2679,14 @@ namespace XamiNotes
 			// aapt resource value: 0x7f0a0039
 			public const int collapseActionView = 2131361849;
 			
-			// aapt resource value: 0x7f0a00d7
-			public const int colorDetalle = 2131362007;
+			// aapt resource value: 0x7f0a00d8
+			public const int colorDetalle = 2131362008;
 			
-			// aapt resource value: 0x7f0a00f2
-			public const int colorItem = 2131362034;
+			// aapt resource value: 0x7f0a00f3
+			public const int colorItem = 2131362035;
 			
-			// aapt resource value: 0x7f0a00e3
-			public const int configNota = 2131362019;
+			// aapt resource value: 0x7f0a00e4
+			public const int configNota = 2131362020;
 			
 			// aapt resource value: 0x7f0a0092
 			public const int container = 2131361938;
@@ -2736,11 +2736,11 @@ namespace XamiNotes
 			// aapt resource value: 0x7f0a007e
 			public const int edit_query = 2131361918;
 			
-			// aapt resource value: 0x7f0a00c8
-			public const int editarNota = 2131361992;
+			// aapt resource value: 0x7f0a00c9
+			public const int editarNota = 2131361993;
 			
-			// aapt resource value: 0x7f0a00d6
-			public const int eliminarNota = 2131362006;
+			// aapt resource value: 0x7f0a00d7
+			public const int eliminarNota = 2131362007;
 			
 			// aapt resource value: 0x7f0a0030
 			public const int end = 2131361840;
@@ -2814,11 +2814,11 @@ namespace XamiNotes
 			// aapt resource value: 0x7f0a0059
 			public const int italic = 2131361881;
 			
-			// aapt resource value: 0x7f0a00ca
-			public const int itemFont = 2131361994;
+			// aapt resource value: 0x7f0a00cb
+			public const int itemFont = 2131361995;
 			
-			// aapt resource value: 0x7f0a00e5
-			public const int itemNuevaFont = 2131362021;
+			// aapt resource value: 0x7f0a00e6
+			public const int itemNuevaFont = 2131362022;
 			
 			// aapt resource value: 0x7f0a0000
 			public const int item_touch_helper_previous_elevation = 2131361792;
@@ -2856,20 +2856,20 @@ namespace XamiNotes
 			// aapt resource value: 0x7f0a00a9
 			public const int listaNotasRecycler = 2131361961;
 			
-			// aapt resource value: 0x7f0a00c7
-			public const int masked = 2131361991;
+			// aapt resource value: 0x7f0a00c8
+			public const int masked = 2131361992;
 			
 			// aapt resource value: 0x7f0a00b1
 			public const int media_actions = 2131361969;
 			
-			// aapt resource value: 0x7f0a00f3
-			public const int menuColor = 2131362035;
+			// aapt resource value: 0x7f0a00f4
+			public const int menuColor = 2131362036;
 			
-			// aapt resource value: 0x7f0a00e6
-			public const int menuFont = 2131362022;
+			// aapt resource value: 0x7f0a00e7
+			public const int menuFont = 2131362023;
 			
-			// aapt resource value: 0x7f0a00c5
-			public const int message = 2131361989;
+			// aapt resource value: 0x7f0a00c6
+			public const int message = 2131361990;
 			
 			// aapt resource value: 0x7f0a0031
 			public const int middle = 2131361841;
@@ -2892,6 +2892,9 @@ namespace XamiNotes
 			// aapt resource value: 0x7f0a001e
 			public const int normal = 2131361822;
 			
+			// aapt resource value: 0x7f0a00c2
+			public const int notaLinearLayout = 2131361986;
+			
 			// aapt resource value: 0x7f0a00ba
 			public const int notification_background = 2131361978;
 			
@@ -2901,20 +2904,20 @@ namespace XamiNotes
 			// aapt resource value: 0x7f0a00b3
 			public const int notification_main_column_container = 2131361971;
 			
-			// aapt resource value: 0x7f0a00e0
-			public const int nuevaNota = 2131362016;
+			// aapt resource value: 0x7f0a00e1
+			public const int nuevaNota = 2131362017;
 			
-			// aapt resource value: 0x7f0a00c2
-			public const int nuevaNotaEditText = 2131361986;
+			// aapt resource value: 0x7f0a00c3
+			public const int nuevaNotaEditText = 2131361987;
 			
 			// aapt resource value: 0x7f0a00be
 			public const int nuevaNotaLinearLayout = 2131361982;
 			
-			// aapt resource value: 0x7f0a00dd
-			public const int optionNote = 2131362013;
-			
 			// aapt resource value: 0x7f0a00de
-			public const int optionTaskList = 2131362014;
+			public const int optionNote = 2131362014;
+			
+			// aapt resource value: 0x7f0a00df
+			public const int optionTaskList = 2131362015;
 			
 			// aapt resource value: 0x7f0a004c
 			public const int parallax = 2131361868;
@@ -2946,8 +2949,8 @@ namespace XamiNotes
 			// aapt resource value: 0x7f0a00b5
 			public const int right_side = 2131361973;
 			
-			// aapt resource value: 0x7f0a00c9
-			public const int saveUpdate = 2131361993;
+			// aapt resource value: 0x7f0a00ca
+			public const int saveUpdate = 2131361994;
 			
 			// aapt resource value: 0x7f0a000c
 			public const int save_image_matrix = 2131361804;
@@ -3057,101 +3060,101 @@ namespace XamiNotes
 			// aapt resource value: 0x7f0a00b0
 			public const int status_bar_latest_event_content = 2131361968;
 			
-			// aapt resource value: 0x7f0a00f6
-			public const int submenuBlue = 2131362038;
-			
-			// aapt resource value: 0x7f0a00da
-			public const int submenuDetBlue = 2131362010;
-			
-			// aapt resource value: 0x7f0a00d9
-			public const int submenuDetGreen = 2131362009;
+			// aapt resource value: 0x7f0a00f7
+			public const int submenuBlue = 2131362039;
 			
 			// aapt resource value: 0x7f0a00db
-			public const int submenuDetOrange = 2131362011;
+			public const int submenuDetBlue = 2131362011;
+			
+			// aapt resource value: 0x7f0a00da
+			public const int submenuDetGreen = 2131362010;
 			
 			// aapt resource value: 0x7f0a00dc
-			public const int submenuDetViolet = 2131362012;
+			public const int submenuDetOrange = 2131362012;
 			
-			// aapt resource value: 0x7f0a00d8
-			public const int submenuDetYellow = 2131362008;
+			// aapt resource value: 0x7f0a00dd
+			public const int submenuDetViolet = 2131362013;
 			
-			// aapt resource value: 0x7f0a00cb
-			public const int submenuFont1 = 2131361995;
-			
-			// aapt resource value: 0x7f0a00d4
-			public const int submenuFont10 = 2131362004;
-			
-			// aapt resource value: 0x7f0a00d5
-			public const int submenuFont11 = 2131362005;
+			// aapt resource value: 0x7f0a00d9
+			public const int submenuDetYellow = 2131362009;
 			
 			// aapt resource value: 0x7f0a00cc
-			public const int submenuFont2 = 2131361996;
+			public const int submenuFont1 = 2131361996;
+			
+			// aapt resource value: 0x7f0a00d5
+			public const int submenuFont10 = 2131362005;
+			
+			// aapt resource value: 0x7f0a00d6
+			public const int submenuFont11 = 2131362006;
 			
 			// aapt resource value: 0x7f0a00cd
-			public const int submenuFont3 = 2131361997;
+			public const int submenuFont2 = 2131361997;
 			
 			// aapt resource value: 0x7f0a00ce
-			public const int submenuFont4 = 2131361998;
+			public const int submenuFont3 = 2131361998;
 			
 			// aapt resource value: 0x7f0a00cf
-			public const int submenuFont5 = 2131361999;
+			public const int submenuFont4 = 2131361999;
 			
 			// aapt resource value: 0x7f0a00d0
-			public const int submenuFont6 = 2131362000;
+			public const int submenuFont5 = 2131362000;
 			
 			// aapt resource value: 0x7f0a00d1
-			public const int submenuFont7 = 2131362001;
+			public const int submenuFont6 = 2131362001;
 			
 			// aapt resource value: 0x7f0a00d2
-			public const int submenuFont8 = 2131362002;
+			public const int submenuFont7 = 2131362002;
 			
 			// aapt resource value: 0x7f0a00d3
-			public const int submenuFont9 = 2131362003;
+			public const int submenuFont8 = 2131362003;
 			
-			// aapt resource value: 0x7f0a00f5
-			public const int submenuGreen = 2131362037;
+			// aapt resource value: 0x7f0a00d4
+			public const int submenuFont9 = 2131362004;
 			
-			// aapt resource value: 0x7f0a00e7
-			public const int submenuNewFont1 = 2131362023;
-			
-			// aapt resource value: 0x7f0a00f0
-			public const int submenuNewFont10 = 2131362032;
-			
-			// aapt resource value: 0x7f0a00f1
-			public const int submenuNewFont11 = 2131362033;
+			// aapt resource value: 0x7f0a00f6
+			public const int submenuGreen = 2131362038;
 			
 			// aapt resource value: 0x7f0a00e8
-			public const int submenuNewFont2 = 2131362024;
+			public const int submenuNewFont1 = 2131362024;
+			
+			// aapt resource value: 0x7f0a00f1
+			public const int submenuNewFont10 = 2131362033;
+			
+			// aapt resource value: 0x7f0a00f2
+			public const int submenuNewFont11 = 2131362034;
 			
 			// aapt resource value: 0x7f0a00e9
-			public const int submenuNewFont3 = 2131362025;
+			public const int submenuNewFont2 = 2131362025;
 			
 			// aapt resource value: 0x7f0a00ea
-			public const int submenuNewFont4 = 2131362026;
+			public const int submenuNewFont3 = 2131362026;
 			
 			// aapt resource value: 0x7f0a00eb
-			public const int submenuNewFont5 = 2131362027;
+			public const int submenuNewFont4 = 2131362027;
 			
 			// aapt resource value: 0x7f0a00ec
-			public const int submenuNewFont6 = 2131362028;
+			public const int submenuNewFont5 = 2131362028;
 			
 			// aapt resource value: 0x7f0a00ed
-			public const int submenuNewFont7 = 2131362029;
+			public const int submenuNewFont6 = 2131362029;
 			
 			// aapt resource value: 0x7f0a00ee
-			public const int submenuNewFont8 = 2131362030;
+			public const int submenuNewFont7 = 2131362030;
 			
 			// aapt resource value: 0x7f0a00ef
-			public const int submenuNewFont9 = 2131362031;
+			public const int submenuNewFont8 = 2131362031;
 			
-			// aapt resource value: 0x7f0a00f7
-			public const int submenuOrange = 2131362039;
+			// aapt resource value: 0x7f0a00f0
+			public const int submenuNewFont9 = 2131362032;
 			
 			// aapt resource value: 0x7f0a00f8
-			public const int submenuViolet = 2131362040;
+			public const int submenuOrange = 2131362040;
 			
-			// aapt resource value: 0x7f0a00f4
-			public const int submenuYellow = 2131362036;
+			// aapt resource value: 0x7f0a00f9
+			public const int submenuViolet = 2131362041;
+			
+			// aapt resource value: 0x7f0a00f5
+			public const int submenuYellow = 2131362037;
 			
 			// aapt resource value: 0x7f0a0076
 			public const int submenuarrow = 2131361910;
@@ -3183,11 +3186,11 @@ namespace XamiNotes
 			// aapt resource value: 0x7f0a0069
 			public const int textSpacerNoTitle = 2131361897;
 			
-			// aapt resource value: 0x7f0a00c4
-			public const int textViewLista = 2131361988;
+			// aapt resource value: 0x7f0a00c5
+			public const int textViewLista = 2131361989;
 			
-			// aapt resource value: 0x7f0a00c3
-			public const int textViewNota = 2131361987;
+			// aapt resource value: 0x7f0a00c4
+			public const int textViewNota = 2131361988;
 			
 			// aapt resource value: 0x7f0a009d
 			public const int text_input_password_toggle = 2131361949;
@@ -3264,8 +3267,8 @@ namespace XamiNotes
 			// aapt resource value: 0x7f0a0016
 			public const int view_offset_helper = 2131361814;
 			
-			// aapt resource value: 0x7f0a00c6
-			public const int visible = 2131361990;
+			// aapt resource value: 0x7f0a00c7
+			public const int visible = 2131361991;
 			
 			// aapt resource value: 0x7f0a003c
 			public const int withText = 2131361852;
@@ -3462,76 +3465,79 @@ namespace XamiNotes
 			public const int EstiloEditText = 2131034155;
 			
 			// aapt resource value: 0x7f05002c
-			public const int ListaNotaslayout = 2131034156;
+			public const int EstiloPopUpLayout = 2131034156;
 			
 			// aapt resource value: 0x7f05002d
-			public const int notification_action = 2131034157;
+			public const int ListaNotaslayout = 2131034157;
 			
 			// aapt resource value: 0x7f05002e
-			public const int notification_action_tombstone = 2131034158;
+			public const int notification_action = 2131034158;
 			
 			// aapt resource value: 0x7f05002f
-			public const int notification_media_action = 2131034159;
+			public const int notification_action_tombstone = 2131034159;
 			
 			// aapt resource value: 0x7f050030
-			public const int notification_media_cancel_action = 2131034160;
+			public const int notification_media_action = 2131034160;
 			
 			// aapt resource value: 0x7f050031
-			public const int notification_template_big_media = 2131034161;
+			public const int notification_media_cancel_action = 2131034161;
 			
 			// aapt resource value: 0x7f050032
-			public const int notification_template_big_media_custom = 2131034162;
+			public const int notification_template_big_media = 2131034162;
 			
 			// aapt resource value: 0x7f050033
-			public const int notification_template_big_media_narrow = 2131034163;
+			public const int notification_template_big_media_custom = 2131034163;
 			
 			// aapt resource value: 0x7f050034
-			public const int notification_template_big_media_narrow_custom = 2131034164;
+			public const int notification_template_big_media_narrow = 2131034164;
 			
 			// aapt resource value: 0x7f050035
-			public const int notification_template_custom_big = 2131034165;
+			public const int notification_template_big_media_narrow_custom = 2131034165;
 			
 			// aapt resource value: 0x7f050036
-			public const int notification_template_icon_group = 2131034166;
+			public const int notification_template_custom_big = 2131034166;
 			
 			// aapt resource value: 0x7f050037
-			public const int notification_template_lines_media = 2131034167;
+			public const int notification_template_icon_group = 2131034167;
 			
 			// aapt resource value: 0x7f050038
-			public const int notification_template_media = 2131034168;
+			public const int notification_template_lines_media = 2131034168;
 			
 			// aapt resource value: 0x7f050039
-			public const int notification_template_media_custom = 2131034169;
+			public const int notification_template_media = 2131034169;
 			
 			// aapt resource value: 0x7f05003a
-			public const int notification_template_part_chronometer = 2131034170;
+			public const int notification_template_media_custom = 2131034170;
 			
 			// aapt resource value: 0x7f05003b
-			public const int notification_template_part_time = 2131034171;
+			public const int notification_template_part_chronometer = 2131034171;
 			
 			// aapt resource value: 0x7f05003c
-			public const int NuevaNotalayout = 2131034172;
+			public const int notification_template_part_time = 2131034172;
 			
 			// aapt resource value: 0x7f05003d
-			public const int OptionsNotePopUp = 2131034173;
+			public const int NuevaNotalayout = 2131034173;
 			
 			// aapt resource value: 0x7f05003e
-			public const int select_dialog_item_material = 2131034174;
+			public const int OptionsNotePopUp = 2131034174;
 			
 			// aapt resource value: 0x7f05003f
-			public const int select_dialog_multichoice_material = 2131034175;
+			public const int select_dialog_item_material = 2131034175;
 			
 			// aapt resource value: 0x7f050040
-			public const int select_dialog_singlechoice_material = 2131034176;
+			public const int select_dialog_multichoice_material = 2131034176;
 			
 			// aapt resource value: 0x7f050041
-			public const int support_simple_spinner_dropdown_item = 2131034177;
+			public const int select_dialog_singlechoice_material = 2131034177;
 			
 			// aapt resource value: 0x7f050042
-			public const int ToolbarNotaslayout = 2131034178;
+			public const int support_simple_spinner_dropdown_item = 2131034178;
 			
 			// aapt resource value: 0x7f050043
-			public const int tooltip = 2131034179;
+			public const int ToolbarNotaslayout = 2131034179;
+			
+			// aapt resource value: 0x7f050044
+			public const int tooltip = 2131034180;
 			
 			static Layout()
 			{

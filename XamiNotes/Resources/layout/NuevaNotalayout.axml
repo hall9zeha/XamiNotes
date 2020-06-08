@@ -38,10 +38,13 @@
            />
          
    </LinearLayout>
-<ScrollView
+<LinearLayout
   
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+        android:id="@+id/notaLinearLayout"
+            android:paddingHorizontal="5dp"
+            
     >
 
 <EditText
@@ -50,5 +53,5 @@
     android:layout_height="wrap_content"
     android:inputType="textMultiLine" />
 
-</ScrollView>
+</LinearLayout>
 </LinearLayout>
