@@ -351,12 +351,12 @@ namespace XamiNotes.Clases
                 EditText nuevaNota, tituloNota;
                 LinearLayout nuevaNotaLinear, linearTituloNota;
                 ColorDrawable colorBackground;
-                nuevaNota = activity.FindViewById<EditText>(Resource.Id.nuevaNotaEditText);
+                //nuevaNota = activity.FindViewById<EditText>(Resource.Id.nuevaNotaEditText);
                 tituloNota = activity.FindViewById<EditText>(Resource.Id.tituloEditText);
                 nuevaNotaLinear = activity.FindViewById<LinearLayout>(Resource.Id.nuevaNotaLinearLayout);
                 linearTituloNota = activity.FindViewById<LinearLayout>(Resource.Id.linearTituloNuevaNota);
 
-                nuevaNota.SetBackgroundColor(color1);
+                //nuevaNota.SetBackgroundColor(color1);
                 tituloNota.SetBackgroundColor(color1);
                 nuevaNotaLinear.SetBackgroundColor(color1);
                 linearTituloNota.SetBackgroundColor(Android.Graphics.Color.ParseColor(color));

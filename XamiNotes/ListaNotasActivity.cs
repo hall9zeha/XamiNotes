@@ -82,7 +82,9 @@ namespace XamiNotes
         {
             popMenu.Dismiss();
             popMenu.Hide();
-            Toast.MakeText(this, "No implementado aún", ToastLength.Short).Show();
+            Intent taskListIntent = new Intent(this, typeof(ListaDeTareasActivity));
+            StartActivity(taskListIntent);
+            
         }
 
         private void OptionNota_Click(object sender, EventArgs e)

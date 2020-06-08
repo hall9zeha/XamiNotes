@@ -40,7 +40,7 @@ namespace XamiNotes
             var menuToolbar = FindViewById<Toolbar>(Resource.Id.toolbarMenuNotas);
             SetActionBar(menuToolbar);
             ActionBar.Title = "Nueva Nota";
-            LienzoDraw linea = new LienzoDraw(this);
+
             nuevaNota = FindViewById<EditText>(Resource.Id.nuevaNotaEditText);
             tituloNota = FindViewById<EditText>(Resource.Id.tituloEditText);
             nuevaNotaLinear = FindViewById<LinearLayout>(Resource.Id.nuevaNotaLinearLayout);
@@ -52,10 +52,14 @@ namespace XamiNotes
             Explode explode = new Explode();
             explode.SetDuration(400);
             Window.EnterTransition = explode;
-            notaCanvasLayout.AddView(linea);
+
+
             tituloNota.FocusableInTouchMode = true;
-            nuevaNota.FocusableInTouchMode = true;
-            // Create your application here
+            //Dibujando Lineas en Linearlayout funcional
+            LienzoDraw linea = new LienzoDraw(this);
+            notaCanvasLayout.AddView(linea);
+
+
         }
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
@@ -65,29 +69,34 @@ namespace XamiNotes
         //El método funciona para dibujar lineas en le layout solo que el edit text interfiere en el buzquemos soluciones
         public class LienzoDraw : View
         {
-
+            
             public LienzoDraw(Context context) : base(context)
             {
-
+               
             }
 
             protected override void OnDraw(Android.Graphics.Canvas canvas)
             {
                 int ancho = canvas.Width;
+                int alto = canvas.Height;
                 Paint colorLine = new Paint();
 
                 colorLine.Color = Android.Graphics.Color.ParseColor("#673AB7");
                 colorLine.StrokeWidth = 4;
-                canvas.DrawLine(0, 30, ancho, 30, colorLine);
-                canvas.DrawLine(0, 80, ancho, 80, colorLine);
-                canvas.DrawLine(0, 160, ancho, 160, colorLine);
-                canvas.DrawLine(0, 260, ancho, 260, colorLine);
-                canvas.DrawLine(0, 360, ancho, 360, colorLine);
-                canvas.DrawLine(0, 460, ancho, 460, colorLine);
+                canvas.DrawLine(70, 0, 70, alto, colorLine);
+                canvas.DrawLine(73, 0, 73, alto, colorLine);
+
+                int cantLineas = alto / 90;
+                for (int i=0; i <cantLineas; i++ ) {
+                    
+                    canvas.DrawLine(0,i * 90 + 90, ancho,i * 90 + 90, colorLine);
+                }
+              
                 base.OnDraw(canvas);
 
             }
         }
+       
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
            

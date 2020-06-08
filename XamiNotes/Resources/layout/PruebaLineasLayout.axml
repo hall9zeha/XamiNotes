@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XamiNotes.Clases.EstiloBlockDeNotas xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pruebaNota"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentTop="true"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="22dp"
+      android:ems="10"
+      android:text="prueba hihihihihihihi \n nininininini \n huuhuhu"
+      android:textAppearance="?android:attr/textAppearanceMedium"
+    android:capitalize="sentences"
+/>

@@ -59,10 +59,12 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clases\EstiloBlockDeNotas.cs" />
     <Compile Include="Clases\Metodos.cs" />
     <Compile Include="Clases\MyAdapter.cs" />
     <Compile Include="DataBase\MisNotasDb.cs" />
     <Compile Include="DetalleNotasActivity.cs" />
+    <Compile Include="ListaDeTareasActivity.cs" />
     <Compile Include="ListaNotasActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Modelo\MisNotas.cs" />
@@ -651,6 +653,21 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\EstiloPopUpLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\ListaDeTareasLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\ItemListaLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\PruebaLineasLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
